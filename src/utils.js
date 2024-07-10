@@ -76,16 +76,6 @@ const getTeamMembers = async (octokit, org, teamNames) => {
         .map((user) => user.login);
 };
 
-const getAssignees = async (octokit, owner, repo, issue_number) => {
-    const issue = await octokit.rest.issues.get({
-        owner,
-        repo,
-        issue_number
-    });
-    const assignees = issue.data.assignees.map((assignee) => assignee.login);
-    return assignees;
-};
-
 const getReviewers = async (octokit, owner, repo, issue_number) => {
     const pullRequest = await octokit.rest.pulls.listRequestedReviewers({
         owner,
@@ -94,32 +84,6 @@ const getReviewers = async (octokit, owner, repo, issue_number) => {
     });
     const reviewers = pullRequest.data.users.map((user) => user.login);
     return reviewers;
-};
-
-const removeAssignees = async (
-    octokit,
-    owner,
-    repo,
-    issue_number,
-    assignees
-) => {
-    try {
-        console.log(
-            `Remove issue ${issue_number} assignees ${JSON.stringify(
-                assignees
-            )}`
-        );
-        await octokit.rest.issues.removeAssignees({
-            owner,
-            repo,
-            issue_number,
-            assignees
-        });
-    } catch (err) {
-        const newErr = new Error('Failed to remove previous assignees');
-        newErr.stack += `\nCaused by: ${err.stack}`;
-        throw newErr;
-    }
 };
 
 const isAnIssue = async (octokit, owner, repo, issue_number) => {
@@ -143,42 +107,11 @@ const isAnIssue = async (octokit, owner, repo, issue_number) => {
     return isAnIssue;
 };
 
-const removeAllReviewers = async (octokit, owner, repo, pull_number) => {
-    try {
-        const issue = await octokit.rest.pulls.get({
-            owner,
-            repo,
-            pull_number
-        });
-        const requested_reviewers = issue.data.requested_reviewers.map(
-            (requested_reviewers) => requested_reviewers.login
-        );
-        console.log(
-            `Remove PR ${issue} reviewers ${JSON.stringify(
-                requested_reviewers
-            )}`
-        );
-        await octokit.rest.pulls.removeRequestedReviewers({
-            owner,
-            repo,
-            pull_number,
-            reviewers: requested_reviewers
-        });
-    } catch (err) {
-        const newErr = new Error('Failed to remove previous reviewers');
-        newErr.stack += `\nCaused by: ${err.stack}`;
-        throw newErr;
-    }
-};
-
 module.exports = {
     parseAssignments,
     parseIntInput,
     pickNRandomFromArray,
-    getAssignees,
     getTeamMembers,
-    removeAssignees,
     isAnIssue,
-    getReviewers,
-    removeAllReviewers
+    getReviewers
 };

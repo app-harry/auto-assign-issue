@@ -1,11 +1,8 @@
 const {
     pickNRandomFromArray,
-    getAssignees,
     getTeamMembers,
-    removeAssignees,
     isAnIssue,
-    getReviewers,
-    removeAllReviewers
+    getReviewers
 } = require('./utils');
 
 /**
