@@ -73,6 +73,8 @@ const runAction = async (octokit, context, parameters) => {
         throw new Error(`Couldn't find issue info in current context`);
     }
 
+    console.log(owner);
+    console.log(targetTeam);
     const teamMembers = await getTeamMembers(octokit, owner, [targetTeam]);
     let newAssignees = newAssignees.concat(teamMembers);
 

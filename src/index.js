@@ -34,6 +34,8 @@ try {
         );
     }
 
+    console.log(gitHubToken);
+    
     // Get octokit
     const octokit = github.getOctokit(gitHubToken);
 
