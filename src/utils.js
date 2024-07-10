@@ -58,6 +58,13 @@ const pickNRandomFromArray = (arr, n) => {
 };
 
 const getTeamMembers = async (octokit, org, teamNames) => {
+    const test = await octokit.rest.teams.listMembersInOrg({
+        org,
+        team_slug: "ios"
+    });
+
+    console.log(test);
+
     const teamMemberRequests = await Promise.all(
         teamNames.map((teamName) =>
             octokit.rest.teams.listMembersInOrg({
