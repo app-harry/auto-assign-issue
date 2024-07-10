@@ -90,7 +90,7 @@ const getReviewers = async (octokit, owner, repo, issue_number) => {
     const pullRequest = await octokit.rest.pulls.listRequestedReviewers({
         owner,
         repo,
-        issue_number
+        pull_number: issue_number
     });
     const reviewers = pullRequest.data.users.map((user) => user.login);
     return reviewers;
