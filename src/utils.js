@@ -179,5 +179,6 @@ module.exports = {
     getTeamMembers,
     removeAssignees,
     isAnIssue,
+    getReviewers,
     removeAllReviewers
 };
