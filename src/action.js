@@ -110,7 +110,6 @@ const runAction = async (octokit, context, parameters) => {
                 pull_number: issueNumber,
                 reviewers: addReviewers
             });
-            console.log(result);
         }
     }
 };
