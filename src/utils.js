@@ -87,7 +87,7 @@ const getAssignees = async (octokit, owner, repo, issue_number) => {
 };
 
 const getReviewers = async (octokit, owner, repo, issue_number) => {
-    const pullRequest = await octokit.rest.pull.listRequestedReviewers.get({
+    const pullRequest = await octokit.rest.pulls.listRequestedReviewers({
         owner,
         repo,
         issue_number
