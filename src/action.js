@@ -104,12 +104,13 @@ const runAction = async (octokit, context, parameters) => {
                     addReviewers
                 )}`
             );
-            await octokit.rest.pulls.requestReviewers({
+            const result = await octokit.rest.pulls.requestReviewers({
                 owner,
                 repo,
                 pull_number: issueNumber,
                 reviewers: addReviewers
             });
+            console.log(result);
         }
     }
 };
