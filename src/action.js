@@ -76,7 +76,7 @@ const runAction = async (octokit, context, parameters) => {
     console.log(owner);
     console.log(targetTeam);
     const teamMembers = await getTeamMembers(octokit, owner, [targetTeam]);
-    let newAssignees = newAssignees.concat(teamMembers);
+    let newAssignees = teamMembers;
 
     // Remove author from reviewers
     const newReviewers = [...newAssignees];
