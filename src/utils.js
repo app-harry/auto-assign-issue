@@ -34,9 +34,9 @@ const parseAssignments = (valueString) => {
 const parseIntInput = (valueString, defaultValue = 0) => {
     let value = defaultValue;
     if (valueString) {
-        value = parseInt(valueString, 10);
-        if (isNaN(value)) {
-            throw new Error(`Invalid integer value: ${valueString}`);
+        resultValue = parseInt(valueString, 10);
+        if (!isNaN(value)) {
+            value = resultValue;
         }
     }
     return value;
@@ -84,6 +84,16 @@ const getAssignees = async (octokit, owner, repo, issue_number) => {
     });
     const assignees = issue.data.assignees.map((assignee) => assignee.login);
     return assignees;
+};
+
+const getReviewers = async (octokit, owner, repo, issue_number) => {
+    const pullRequest = await octokit.rest.pull.listRequestedReviewers.get({
+        owner,
+        repo,
+        issue_number
+    });
+    const reviewers = pullRequest.data.users.map((user) => user.login);
+    return reviewers;
 };
 
 const removeAssignees = async (

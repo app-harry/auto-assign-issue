@@ -4,38 +4,18 @@ inputs:
     repo-token:
         description: 'The GITHUB_TOKEN, needed to update the Issue'
         default: ${{ github.token }}
-    assignees:
-        description: 'Comma separated list of user names. Required if teams is not specified.'
-        required: false
-    teams:
-        description: 'Comma separated list of team names. Required if assignees is not specified.'
+    targetTeam:
+        description: 'Target assign team.'
+        required: true
+    excludeAssignees:
+        description: 'Comma separated list of exclude assign reviewe usernames.'
         required: false
     numOfAssignee:
         description: 'Number of random assignee'
-        required: false
-    abortIfPreviousAssignees:
-        description: 'Flag that aborts the action if there were assignees previously.'
-        required: false
-        default: false
-    removePreviousAssignees:
-        description: 'Flag that removes assignees before assigning them (useful the issue is reasigned).'
-        required: false
-        default: false
-    allowNoAssignees:
-        description: 'Flag that prevents the action from failing when there are no assignees.'
-        required: false
-        default: false
-    allowSelfAssign:
-        description: 'Flag that allows self-assignment to the issue author.'
-        required: false
-        default: true
+        required: true
     issueNumber:
         description: 'Manually specified issue (or PR) ID to be used instead of the one in the context.'
         required: false
-    teamIsPullRequestReviewer:
-        description: 'Flag that allows a team to be set as reviewer'
-        required: false
-        default: false
 
 runs:
     using: 'node20'
