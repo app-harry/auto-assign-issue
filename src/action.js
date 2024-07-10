@@ -71,8 +71,6 @@ const runAction = async (octokit, context, parameters) => {
         throw new Error(`Couldn't find issue info in current context`);
     }
 
-    console.log(owner);
-    console.log(targetTeam);
     const teamMembers = await getTeamMembers(octokit, owner, [targetTeam]);
     let newAssignees = teamMembers;
 
@@ -82,6 +80,14 @@ const runAction = async (octokit, context, parameters) => {
     if (foundIndex !== -1) {
         newReviewers.splice(foundIndex, 1);
     }
+
+    // Remove excludeAssignees from reviewers
+    excludeAssignees.forEach((reviewer) => {
+        const foundIndex = newReviewers.indexOf(reviewer);
+        if (foundIndex !== -1) {
+            newReviewers.splice(foundIndex, 1);
+        }
+    });
 
     // Remove current reviewers
     const curReviewers = await getReviewers(octokit, owner, repo, issueNumber);
