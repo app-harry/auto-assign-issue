@@ -3,7 +3,7 @@ description: 'Auto-assigns issues to users or team members'
 inputs:
     repo-token:
         description: 'The GITHUB_TOKEN, needed to update the Issue'
-        default: ${{ secrets.GITHUB_TOKEN }}
+        default: ${{ github.token }}
     targetTeam:
         description: 'Target assign team.'
         required: true
