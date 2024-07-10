@@ -4,6 +4,7 @@ const {
     getTeamMembers,
     removeAssignees,
     isAnIssue,
+    getReviewers,
     removeAllReviewers
 } = require('./utils');
 
