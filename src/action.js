@@ -73,8 +73,8 @@ const runAction = async (octokit, context, parameters) => {
         throw new Error(`Couldn't find issue info in current context`);
     }
 
-    const teamMembers = await getTeamMembers(octokit, owner, teams);
-    let newAssignees = newAssignees.concat([targetTeam]);
+    const teamMembers = await getTeamMembers(octokit, owner, [targetTeam]);
+    let newAssignees = newAssignees.concat(teamMembers);
 
     // Remove author from reviewers
     const newReviewers = [...newAssignees];
