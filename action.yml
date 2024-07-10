@@ -1,5 +1,5 @@
 name: 'Auto-assign Reviewer'
-description: 'Auto-assigns reviewers to team's users'
+description: 'Auto-assigns reviewers to teams users'
 inputs:
     repo-token:
         description: 'The GITHUB_TOKEN needed to update the issue'
